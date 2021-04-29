@@ -86,11 +86,15 @@ function AdminCategory(){
                                 Create
                             </button>
 
-                            <button onClick={() => editProductOnSaveHandler('remove', dispatch(fetchCategories()))}
-                                className={classNames('editorBtn remove', {'disabled': !editCategory.id || role === 'ContentManager'})}
-                            >
-                                Remove
-                            </button>
+                            {
+                                role === 'Administrator' && (
+                                    <button onClick={() => editProductOnSaveHandler('remove', dispatch(fetchCategories()))}
+                                        className={classNames('editorBtn remove', {'disabled': !editCategory.id || role === 'ContentManager'})}
+                                    >
+                                        Remove
+                                    </button>
+                                )
+                            }
                         </div>
                     </div>
                     <div className='editorItem'>

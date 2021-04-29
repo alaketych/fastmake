@@ -127,7 +127,7 @@ function AdminProducts(){
                                 Create
                             </button>
                             {
-                                role === 'Administrator' (
+                                role === 'Administrator' && (
                                     <button onClick={() => editProductOnSaveHandler('remove', dispatch(fetchProducts(category, sortBy)))}
                                         className={classNames('editorBtn remove', {'disabled': !editProduct.id})}
                                     >
