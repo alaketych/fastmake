@@ -24,7 +24,7 @@ function AdminCategory(){
         console.log('loggedin:: ', loggedIn)
         const token = localStorage.getItem('token');
         const userRole = localStorage.getItem('userRole');
-        if (!!loggedIn && token && (userRole === 'Administrator' || userRole === 'ProductManager')) {
+        if (!!loggedIn && token && (userRole === 'Administrator' || userRole === 'ContentManager')) {
             dispatch(fetchCategories());
         } else {
             history.push('/');

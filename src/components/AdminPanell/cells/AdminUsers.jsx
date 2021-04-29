@@ -37,7 +37,7 @@ function AdminUsers(){
     useEffect(() => {
         const token = localStorage.getItem('token');
         const userRole = localStorage.getItem('userRole');
-        if (!!loggedIn && token && (userRole === 'Administrator' || userRole === 'ProductManager')) {
+        if (!!loggedIn && token && (userRole === 'Administrator' || userRole === 'ContentManager')) {
             dispatch(fetchUsers());
         } else {
             history.push('/');
@@ -71,70 +71,68 @@ function AdminUsers(){
                 </h2>
                 <div className='editorWrapper'>
                     <div className='editor'>
-                        <CreatableSelect
-                            onChange={e => onEditChange('role', e.value)}
-                            options={[
-                                {
-                                    value: "ContentManager",
-                                    label: "Content Manager",
-                                },
-                                {
-                                    value: "Customer",
-                                    label: "Customer",
-                                },
-                                {
-                                    value: "Administrator",
-                                    label: "Administrator",
-                                },
-                            ]}
-                            placeholder='Role'
-                            value={{
-                                value: editUser.role,
-                                label: editUser.role,
-                            }}
-                            className='editorSelect'
-                        />
                         {
-                            role === 'Administrator' && (
-                                <>
-                                    <input type="text" 
-                                        onChange={e => onEditChange('firstName', e.target.value)}
-                                        placeholder='First name'
-                                        value={editUser.firstName}
-                                        className='editorInput'
-                                        defaultValue={''}
-                                    />
-                                    <input type="text" 
-                                        onChange={e => onEditChange('lastName', e.target.value)}
-                                        placeholder='Last name'
-                                        value={editUser.lastName}
-                                        className='editorInput'
-                                        defaultValue={''}
-                                    />
-                                    <input type="text" 
-                                        onChange={e => onEditChange('phone', e.target.value)}
-                                        placeholder='Phone'
-                                        value={editUser.phone}
-                                        className='editorInput'
-                                        defaultValue={''}
-                                    />
-                                    <input type="text" 
-                                        onChange={e => onEditChange('email', e.target.value)}
-                                        placeholder='Email'
-                                        value={editUser.email}
-                                        className='editorInput'
-                                        defaultValue={''}
-                                    />
-                                    <input type="number" 
-                                        onChange={e => onEditChange('id', e.target.value)}
-                                        placeholder='Id'
-                                        value={editUser.id}
-                                        className='editorInput'
-                                        defaultValue={''}
-                                    />
-                                </>
+                            role === 'Administrator' (
+                                <CreatableSelect
+                                    onChange={e => onEditChange('role', e.value)}
+                                    options={[
+                                        {
+                                            value: "ContentManager",
+                                            label: "Content Manager",
+                                        },
+                                        {
+                                            value: "Customer",
+                                            label: "Customer",
+                                        },
+                                        {
+                                            value: "Administrator",
+                                            label: "Administrator",
+                                        },
+                                    ]}
+                                    placeholder='Role'
+                                    value={{
+                                        value: editUser.role,
+                                        label: editUser.role,
+                                    }}
+                                    className='editorSelect'
+                                />
                             )
                         }
+                        <input type="text" 
+                            onChange={e => onEditChange('firstName', e.target.value)}
+                            placeholder='First name'
+                            value={editUser.firstName}
+                            className='editorInput'
+                            defaultValue={''}
+                        />
+                        <input type="text" 
+                            onChange={e => onEditChange('lastName', e.target.value)}
+                            placeholder='Last name'
+                            value={editUser.lastName}
+                            className='editorInput'
+                            defaultValue={''}
+                        />
+                        <input type="text" 
+                            onChange={e => onEditChange('phone', e.target.value)}
+                            placeholder='Phone'
+                            value={editUser.phone}
+                            className='editorInput'
+                            defaultValue={''}
+                        />
+                        <input type="text" 
+                            onChange={e => onEditChange('email', e.target.value)}
+                            placeholder='Email'
+                            value={editUser.email}
+                            className='editorInput'
+                            defaultValue={''}
+                        />
+                        <input type="number" 
+                            onChange={e => onEditChange('id', e.target.value)}
+                            placeholder='Id'
+                            value={editUser.id}
+                            className='editorInput'
+                            defaultValue={''}
+                        />
                         <div className='buttonsWrapper'>
                             <button onClick={() => editProductOnSaveHandler('update', dispatch(fetchUsers()))}
                                 className={classNames('editorBtn update', {'disabled': 
@@ -153,14 +151,18 @@ function AdminUsers(){
                                 Create
                             </button>
 
-                            <button onClick={() => editProductOnSaveHandler('remove', dispatch(fetchUsers()))}
-                                className={classNames('editorBtn remove', {'disabled': 
-                                    !(users.data || []).map(e => e.id).includes(editUser.id) || role === 'ContentManager'}
-                                    )
-                                }
-                            >
-                                Remove
-                            </button>
+                            {
+                                role === 'Administrator' && (
+                                    <button onClick={() => editProductOnSaveHandler('remove', dispatch(fetchUsers()))}
+                                        className={classNames('editorBtn remove', {'disabled': 
+                                            !(users.data || []).map(e => e.id).includes(editUser.id) || role === 'ContentManager'}
+                                            )
+                                        }
+                                    >
+                                        Remove
+                                    </button>
+                                )
+                            }
                         </div>
                     </div>
                     <div className='editorItem'>

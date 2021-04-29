@@ -31,7 +31,7 @@ function AdminProducts(){
     } = useSelector(({ filters }) => filters);
     const editProduct = useSelector(({admin}) => admin.editProduct);
     const pageCount = Math.ceil(products.totalRecords / products.pageSize);
-    const {loggedIn} = useSelector(({user}) => user);
+    const {role, loggedIn} = useSelector(({user}) => user);
 
     const history = useHistory();
 
@@ -45,7 +45,7 @@ function AdminProducts(){
     useEffect(() => {
         const token = localStorage.getItem('token');
         const userRole = localStorage.getItem('userRole');
-        if (!!loggedIn && token && (userRole === 'Administrator' || userRole === 'ProductManager')) {
+        if (!!loggedIn && token && (userRole === 'Administrator' || userRole === 'ContentManager')) {
             dispatch(fetchProducts(category, sortBy));
         } else {
             history.push('/');
@@ -126,11 +126,15 @@ function AdminProducts(){
                             >
                                 Create
                             </button>
-                            <button onClick={() => editProductOnSaveHandler('remove', dispatch(fetchProducts(category, sortBy)))}
-                                className={classNames('editorBtn remove', {'disabled': !editProduct.id})}
-                            >
-                                Remove
-                            </button>
+                            {
+                                role === 'Administrator' (
+                                    <button onClick={() => editProductOnSaveHandler('remove', dispatch(fetchProducts(category, sortBy)))}
+                                        className={classNames('editorBtn remove', {'disabled': !editProduct.id})}
+                                    >
+                                        Remove
+                                    </button>
+                                )
+                            }
                         </div>
                     </div>
                     <div className='editorItem'>
