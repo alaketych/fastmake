@@ -19,6 +19,13 @@ export const fetchProducts = (category, sortBy, pageNumber) => (dispatch, getSta
   });
 };
 
+export const fetchCategoryProducts = (id, sortBy, pageNumber) => (dispatch, getState) => {
+  dispatch(setLoaded(false))
+  axios.get(`https://localhost:5001/products/category/${id}?${!sortBy ? '' : `sortBy=${sortBy}`}&${pageNumber ? `pageNumber=${pageNumber}`:''}`).then(({ data }) => {
+      dispatch(setProducts(data))
+  });
+};
+
 export const fetchProduct = (id) => dispatch => {
   dispatch(setLoaded(false))
   getProduct(id).then(({ data }) => {
@@ -49,6 +56,17 @@ export const onChangePage = (id, sortBy) => dispatch => {
     page: id,
   })
   axios.get(`https://localhost:5001/products?pageNumber=${id}&${!sortBy ? '' : `sortBy=${sortBy}`}`).then(({ data }) => {
+      dispatch(setProducts(data))
+  });
+};
+
+export const onChangeCategoryProductsPage = (id, sortBy) => dispatch => {
+  dispatch(setLoaded(false))
+  dispatch({
+    type: 'PAGE_CHANGE',
+    page: id,
+  })
+  axios.get(`https://localhost:5001/products/category?pageNumber=${id}&${!sortBy ? '' : `sortBy=${sortBy}`}`).then(({ data }) => {
       dispatch(setProducts(data))
   });
 };

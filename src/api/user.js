@@ -15,7 +15,7 @@ return dispatch => {
     },
     body: JSON.stringify(credits)
     })
-    .then(data => data.json())
+    .then(data => data)
     .then( ({role, tokenString}) => {
         if (tokenString) {
             callback();

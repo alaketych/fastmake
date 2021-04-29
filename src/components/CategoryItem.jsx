@@ -2,12 +2,12 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "../sass/components/CategoryItem.sass"
 
-function CategoryItem({ image, title, itemId }) {
+function CategoryItem({ image, title, id }) {
     return (
-        <Link to={ `/products/category/${ itemId }` }>
+        <Link to={ `/products/category/${ id }` }>
             <div className="category-item enum">
                 <div className="category-item__thumb">
-                    <Link to={ `/products/category/${ itemId }` } style={{ textDecoration: "none", color: "inherit" }}>
+                    <Link to={ `/products/category/${ id }` } style={{ textDecoration: "none", color: "inherit" }}>
                         <img className="category-item__image" src={ image } alt="item" />
                     </Link>
                 </div>

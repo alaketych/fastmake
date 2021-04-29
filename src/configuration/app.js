@@ -18,6 +18,10 @@ export function getPageProducts(query) {
     return axios.get(URL + `products?${query}`);
 };
 
+export function getCategoryProducts(query) {
+    return axios.get(URL + `products/category/${query}`)
+}
+
 export function getCategory(id) {
     return axios.get(URL + `categories/${id}`);
 };

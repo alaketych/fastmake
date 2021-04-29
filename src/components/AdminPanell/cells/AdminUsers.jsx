@@ -23,17 +23,6 @@ function AdminUsers(){
 
     const history = useHistory();
 
-    const testUsers = [
-        {
-            firstName: 'test',
-            lastName: 'test',
-            phone: 'test',
-            email: 'test',
-            id: 123,
-            role: 'test',
-        },
-    ]
-
     useEffect(() => {
         const token = localStorage.getItem('token');
         const userRole = localStorage.getItem('userRole');
@@ -57,7 +46,6 @@ function AdminUsers(){
     };
 
     const handlePageChange = ({ selected }) => {
-        // getPageChange(selected + 1);
         dispatch(usersOnChangePage(selected + 1));
     };
 
@@ -151,18 +139,7 @@ function AdminUsers(){
                                 Create
                             </button>
 
-                            {
-                                role === 'Administrator' && (
-                                    <button onClick={() => editProductOnSaveHandler('remove', dispatch(fetchUsers()))}
-                                        className={classNames('editorBtn remove', {'disabled': 
-                                            !(users.data || []).map(e => e.id).includes(editUser.id) || role === 'ContentManager'}
-                                            )
-                                        }
-                                    >
-                                        Remove
-                                    </button>
-                                )
-                            }
+                            
                         </div>
                     </div>
                     <div className='editorItem'>

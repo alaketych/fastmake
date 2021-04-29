@@ -21,7 +21,6 @@ function AdminCategory(){
     const history = useHistory();
 
     useEffect(() => {
-        console.log('loggedin:: ', loggedIn)
         const token = localStorage.getItem('token');
         const userRole = localStorage.getItem('userRole');
         if (!!loggedIn && token && (userRole === 'Administrator' || userRole === 'ContentManager')) {

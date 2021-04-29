@@ -91,28 +91,24 @@ function AdminProducts(){
                             placeholder='Image'
                             value={editProduct.thumbnail}
                             className='editorInput'
-                            defaultValue={''}
                         />
                         <input type="text" 
                             onChange={e => onEditChange('label', e.target.value)}
                             placeholder='Label'
                             value={editProduct.label}
                             className='editorInput'
-                            defaultValue={''}
                         />
                         <input type="text" 
                             onChange={e => onEditChange('description', e.target.value)}
                             placeholder='Description'
                             value={editProduct.description}
                             className='editorInput'
-                            defaultValue={''}
                         />
                         <input type="number" 
                             onChange={e => onEditChange('price', e.target.value)}
                             placeholder='Price'
                             value={editProduct.price}
                             className='editorInput'
-                            defaultValue={''}
                         />
                         <div className='buttonsWrapper'>
                             <button onClick={() => editProductOnSaveHandler('update', dispatch(fetchProducts(category, sortBy)))}

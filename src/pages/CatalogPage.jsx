@@ -22,7 +22,7 @@ function CatalogPage() {
                         category && category.map(item => 
                             <CategoryItem 
                                 key={ item.id }
-                                itemId={ item.id }
+                                id={ item.id }
                                 image={ item.thumbnail }
                                 title={ item.label }
                             />
