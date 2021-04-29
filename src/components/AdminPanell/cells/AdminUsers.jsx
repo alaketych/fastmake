@@ -72,7 +72,7 @@ function AdminUsers(){
                 <div className='editorWrapper'>
                     <div className='editor'>
                         {
-                            role === 'Administrator' (
+                            role === 'Administrator' && (
                                 <CreatableSelect
                                     onChange={e => onEditChange('role', e.value)}
                                     options={[
