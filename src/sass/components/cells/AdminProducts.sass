@@ -1,0 +1,91 @@
+.productLi
+    display: flex
+    padding: 12px 0
+    border-bottom: 1px solid #e3e3e3
+    cursor: pointer
+    transition: 0.6s ease
+    padding: 10px
+
+    img
+        max-width: 400px
+
+    &.active
+        background: #e3e3e3
+
+.descWrapper
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    padding-left: 12px
+
+.adminProductsWrapper
+    padding: 32px
+
+.adminProductsHeader
+    text-align: center !important
+
+.editor
+    padding: 12px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    box-shadow: 0px 4px 15px #e3e3e3
+    width: 450px
+
+.editorInput
+    padding: 12px
+    border-radius: 7px
+    margin: 8px
+    border-width: 1px
+
+.editorWrapper
+    display: flex
+    justify-content: space-between
+    margin-bottom: 32px
+
+.editorItem
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+.editorBtn
+    background: none
+    border: 1px solid
+    padding: 12px
+    border-radius: 12px
+    width: 100px
+
+    &.disabled
+        pointer-events: none
+
+    &.update
+        border-color: lightblue
+
+        &:hover
+            background: lightblue
+            color: white
+
+    &.create
+        border-color: lightgreen
+
+        &:hover
+            background: lightgreen
+            color: gray
+
+    &.remove
+        border-color: red
+
+        &:hover
+            background: red
+            color: white
+
+.buttonsWrapper
+    display: flex
+    justify-content: space-between
+
+.categoryEditIMG
+    img
+        width: 220px
+
+.editorSelect
+    margin: 8px

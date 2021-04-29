@@ -1,0 +1,26 @@
+.categories 
+  ul 
+    display: flex
+
+    li 
+      background-color: #fdfdfd
+      padding: 13px 30px
+      border-radius: 30px
+      margin-right: 10px
+      cursor: pointer
+      border: 2px solid #f3f3f3
+      transition: background-color 0.1s ease-in-out
+      
+      &:hover 
+        background-color: darken(#f9f9f9, 2%)
+
+      &:active 
+        background-color: darken(#f9f9f9, 5%)
+
+      &.active
+        color: #fff
+        background-color: #282828
+        border: 2px solid #282828
+      
+    
+  

@@ -1,0 +1,48 @@
+form
+    display: flex
+    flex-direction: column
+    width: 35%
+
+    label
+        width: 100%
+        font-size: 17px
+        font-weight: 500
+        padding: 15px 0px
+        color: #191a1d
+        letter-spacing: .04em
+        text-transform: uppercase
+
+        display: flex
+        align-items: flex-start
+
+    input, textarea
+        outline: 0
+        width: 100%
+        border: 2px solid #e9e9e9
+        background: #fdfdfd
+        font-size: 15px
+        border-radius: 5px
+        padding: 13px 15px
+        margin-bottom: 15px
+
+        &:focus
+            border: 2px solid #ff8000
+
+    textarea
+        min-height: 250px
+
+        &[name=desc]
+        resize: vertical
+
+    .button
+        font-size: 17px
+        margin-top: 30px
+
+
+.error
+    border-color: #ff8000
+
+.input-feedback
+    display: flex
+    color: #ff8000
+    font-size: 13px
