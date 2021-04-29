@@ -43,7 +43,6 @@ function AdminCategory(){
     };
 
     const handlePageChange = ({ selected }) => {
-        // getPageChange(selected + 1);
         dispatch(categoriesOnChangePage(selected + 1));
     };
 
