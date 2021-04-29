@@ -59,7 +59,7 @@ export const editProduct = (type, editedProduct, session = '', callback) => {
                     }
                 }
             })
-            .catch(err => console.log('Error while updating user', err));
+            .catch(err => console.log('Error while updating product', err));
             break;
         }
         case 'create': {
@@ -86,7 +86,7 @@ export const editProduct = (type, editedProduct, session = '', callback) => {
                     }
                 }
             })
-            .catch(err => console.log('Error while adding user', err));
+            .catch(err => console.log('Error while adding product', err));
             break;
         }
         case 'remove': {
@@ -105,7 +105,7 @@ export const editProduct = (type, editedProduct, session = '', callback) => {
                     }
                 }
             })
-            .catch(err => console.log('Error while removing user', err));
+            .catch(err => console.log('Error while removing product', err));
             break;
         }
         default: {
@@ -133,7 +133,7 @@ export const editCategory = (type, editedCategory, session = '', callback) => {
                     }
                 }
             })
-            .catch(err => console.log('Error while editing user', err));
+            .catch(err => console.log('Error while editing category', err));
             break;
         }
         case 'create': {
@@ -159,7 +159,7 @@ export const editCategory = (type, editedCategory, session = '', callback) => {
                     }
                 }
             })
-            .catch(err => console.log('Error while adding user', err));
+            .catch(err => console.log('Error while adding category', err));
             break;
         }
         case 'remove': {
@@ -178,7 +178,7 @@ export const editCategory = (type, editedCategory, session = '', callback) => {
                     }
                 }
             })
-            .catch(err => console.log('Error while removing user', err));
+            .catch(err => console.log('Error while removing category', err));
             break;
         }
         default: {
