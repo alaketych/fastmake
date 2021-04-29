@@ -6,6 +6,12 @@ import { setCategory, setSortBy } from '../redux/actions/filters';
 import { ProductItem, Loader, SortPopup, CategoryFilter } from "../components/_index";
 import ReactPaginate from "react-paginate";
 import "../sass/components/Pagination.sass";
+import {
+    editProductSearch,
+    onProductSearch,
+    productsSearchReset,
+} from '../redux/actions';
+import CreatableSelect from 'react-select/creatable';
 
 const categoryNames = ['Dairy and Eggs', 'Fruits and Vegetables', 'Drinks']
 const sortItems = [
@@ -19,11 +25,22 @@ function ProductPage() {
     const dispatch  = useDispatch()
     const items = useSelector(({products}) => products.items)
     const isLoaded = useSelector(({products}) => products.isLoaded)
-    const { category, sortBy, pageNumber } = useSelector(({ filters }) => filters)
-
+    const {
+        category,
+        sortBy,
+        pageNumber,
+        editProductsSearchType,
+        editProductsSearchValue,
+    } = useSelector(({ filters }) => filters)
     const [state, setState] = useState({
         items: (items || {}).data || [],
     });
+
+    useEffect(() => {
+        return () => {
+            dispatch(productsSearchReset());
+        }
+    }, []);
 
     useEffect(() => {
         setState({
@@ -61,7 +78,15 @@ function ProductPage() {
             ...state,
             items: newData,
         })
-    }
+    };
+    
+    const onSearchSelectHandler = (name, value) => {
+        dispatch(editProductSearch(name, value));
+    };
+
+    const onSearchHandler = (name, value) => {
+        dispatch(editProductSearch(name, value))
+    };
 
     const pageCount = Math.ceil(items.totalRecords / items.pageSize)
 
@@ -73,12 +98,39 @@ function ProductPage() {
                     activeCategory = { category }
                     onClickCategory = { onSelectCategory }
                 />
-                <input
-                    onChange={handleInputChange}
-                    defaultValue=''
-                    placeholder='Search'
-                    className='input'
-                />
+                <div>
+                    <CreatableSelect
+                        onChange={e => onSearchSelectHandler('editProductsSearchType',e.value)}
+                        options={[
+                            {
+                                value: "Description",
+                                label: "Description",
+                            },
+                            {
+                                value: "Label",
+                                label: "Label",
+                            },
+                        ]}
+                        placeholder='Product'
+                        value={{
+                            value: editProductsSearchType,
+                            label: editProductsSearchType,
+                        }}
+                        className='editorSelect'
+                    />
+                    <input type="text" 
+                        onChange={e => onSearchHandler('editProductsSearchValue', e.target.value)}
+                        placeholder='Search Value'
+                        value={editProductsSearchValue}
+                        className='editorInput'
+                        defaultValue={''}
+                    />
+                    <button
+                            onClick={() => dispatch(onProductSearch())}
+                        >
+                            Search
+                    </button>
+                </div>
                 <SortPopup
                     items = { sortItems }          
                     activeSortType = { sortBy }

@@ -6,6 +6,9 @@ import {
     editCategory,
     editUser,
 } from '../../api';
+import {
+    fetchProductsSearch,
+} from '../actions';
 
 export const USER_GET_SUCCESS = 'USER_GET_SUCCESS';
 
@@ -22,6 +25,9 @@ export const SET_CATEGORY_EDIT_SAVE = 'SET_CATEGORY_EDIT_SAVE';
 export const SET_PRODUCT_EDIT_ID = 'SET_PRODUCT_EDIT_ID';
 export const SET_PRODUCT_EDIT_CHANGE = 'SET_PRODUCT_EDIT_CHANGE';
 export const SET_PRODUCT_EDIT_SAVE = 'SET_PRODUCT_EDIT_SAVE';
+
+export const EDIT_PRODUCT_SEARCH = 'EDIT_PRODUCT_SEARCH';
+export const EDIT_PRODUCT_SEARCH_RESET = 'EDIT_PRODUCT_SEARCH_RESET';
 
 /* * * USERS * * */
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
@@ -108,6 +114,16 @@ export const editProductOnSave = (type, callback = () => {}) => {
         editProduct(type, editFields, session, callback);
     }
 };
+
+export const editProductSearch = (name, value) => {
+    return dispatch => {
+        dispatch({
+            type: EDIT_PRODUCT_SEARCH,
+            value,
+            name,
+        })
+    }
+}
 
 /* * * CATEGORIES * * */
 
@@ -201,3 +217,20 @@ export const editUserOnSave = type => {
         editUser(type, editFields, session);
     }
 };
+
+/* * * FILTERS * * */
+
+export const onProductSearch = () => {
+    return (dispatch, getState) => {
+        const { editProductsSearchType, editProductsSearchValue } = getState().filters;
+        dispatch(fetchProductsSearch(editProductsSearchType, editProductsSearchValue));
+    }
+};
+
+export const productsSearchReset = () => {
+    return dispatch => {
+        dispatch({
+            type: EDIT_PRODUCT_SEARCH_RESET,
+        })
+    }
+}

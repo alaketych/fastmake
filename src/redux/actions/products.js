@@ -1,7 +1,11 @@
 import axios from 'axios';
-import { 
-  getProducts,
+import {
+  getProduct
 } from '../../configuration/app';
+import {
+  IP_BACK,
+  PRODUCTS,
+} from '../../configuration';
 
 export const setLoaded = value => ({
   type: 'SET_LOADED',
@@ -17,10 +21,26 @@ export const fetchProducts = (category, sortBy, pageNumber) => (dispatch, getSta
 
 export const fetchProduct = (id) => dispatch => {
   dispatch(setLoaded(false))
-  getProducts(id).then(({ data }) => {
+  getProduct(id).then(({ data }) => {
       dispatch(setEditFields(data))
   });
 };
+
+export const fetchProductsSearch = (type, value) => {
+  return dispatch => {
+    if (type && value) {
+      axios.get(IP_BACK + PRODUCTS + `?searchBy=${type}&searchValue=${value}`)
+      .then(({data}) => {
+        dispatch(setProducts(data))
+      });
+    } else {
+      axios.get(IP_BACK + PRODUCTS)
+      .then(({data}) => {
+        dispatch(setProducts(data))
+      });
+    }
+  };
+}
 
 export const onChangePage = (id, sortBy) => dispatch => {
   dispatch(setLoaded(false))

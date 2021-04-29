@@ -7,11 +7,15 @@ import {
     fetchProducts,
     editProductChange,
     editProductOnSave,
+    editProductSearch,
+    onProductSearch,
+    productsSearchReset,
 } from '../../../redux/actions';
 import { 
     onChangePage
 } from '../../../redux/actions/products';
 import "../../../sass/components/cells/AdminProducts.sass";
+import CreatableSelect from 'react-select/creatable';
 import ReactPaginate from "react-paginate";
 
 function AdminProducts(){
@@ -19,12 +23,24 @@ function AdminProducts(){
     const dispatch = useDispatch();
     const products = useSelector(({products}) => products.items);
     
-    const { category, sortBy, pageNumber } = useSelector(({ filters }) => filters);
+    const {
+        category,
+        sortBy,
+        editProductsSearchType,
+        editProductsSearchValue,
+    } = useSelector(({ filters }) => filters);
     const editProduct = useSelector(({admin}) => admin.editProduct);
     const pageCount = Math.ceil(products.totalRecords / products.pageSize);
     const {loggedIn} = useSelector(({user}) => user);
 
     const history = useHistory();
+
+
+    useEffect(() => {
+        return () => {
+            dispatch(productsSearchReset());
+        }
+    }, []);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -51,7 +67,15 @@ function AdminProducts(){
     const handlePageChange = ({ selected }) => {
         // getPageChange(selected + 1);
         dispatch(onChangePage(selected + 1, sortBy));
-    }
+    };
+
+    const onSearchSelectHandler = (name, value) => {
+        dispatch(editProductSearch(name, value));
+    };
+
+    const onSearchHandler = (name, value) => {
+        dispatch(editProductSearch(name, value))
+    };
 
     return (
         <div className='content-inner'>
@@ -122,7 +146,39 @@ function AdminProducts(){
                         <a className='editedItem'>{ editProduct.price }</a>
                     </div>
                 </div>
-
+                <div>
+                    <CreatableSelect
+                        onChange={e => onSearchSelectHandler('editProductsSearchType',e.value)}
+                        options={[
+                            {
+                                value: "Description",
+                                label: "Description",
+                            },
+                            {
+                                value: "Label",
+                                label: "Label",
+                            },
+                        ]}
+                        placeholder='Product'
+                        value={{
+                            value: editProductsSearchType,
+                            label: editProductsSearchType,
+                        }}
+                        className='editorSelect'
+                    />
+                    <input type="text" 
+                        onChange={e => onSearchHandler('editProductsSearchValue', e.target.value)}
+                        placeholder='Search Value'
+                        value={editProductsSearchValue}
+                        className='editorInput'
+                        defaultValue={''}
+                    />
+                    <button
+                        onClick={() => dispatch(onProductSearch())}
+                    >
+                        Search
+                    </button>
+                </div>
                 <ul>
                     {
                         (products.data || []).map(e => (
