@@ -6,7 +6,7 @@ import "../../sass/components/AdminPanell.sass";
 
 function AdminPanell() {
 
-    const {loggedIn} = useSelector(({user}) => user);
+    const {loggedIn, role} = useSelector(({user}) => user);
 
     const history = useHistory();
 
@@ -42,18 +42,22 @@ function AdminPanell() {
                     Products
                 </Link>
             </div>
-            <div className='link'>
-                <Link to="/admin-users"
-                    style={{
-                        textDecoration: "none",
-                        border: '1px solid #e3e3e3',
-                        padding: '12px',
-                        borderRadius: '7px',
-                    }}
-                >
-                    Users
-                </Link>
-            </div>
+            {
+                role === 'Administrator' && (
+                    <div className='link'>
+                        <Link to="/admin-users"
+                            style={{
+                                textDecoration: "none",
+                                border: '1px solid #e3e3e3',
+                                padding: '12px',
+                                borderRadius: '7px',
+                            }}
+                        >
+                            Users
+                        </Link>
+                    </div>
+                )
+            }
         </div>
     )
 };

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import {} from '../configuration/app';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { Field, Form, Formik } from 'formik';
 import { getUserData } from '../api';
+import { userSetDefaultEmailReset } from '../redux/actions';
 import * as Yup from 'yup'
 
 const SendMessage = Yup.object().shape({    
@@ -26,6 +27,14 @@ function Log({ setToken }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
+    const {email} = useSelector(({user}) => user);
+
+
+    useEffect(() => {
+        return () => {
+            dispatch(userSetDefaultEmailReset());
+        }
+    }, []);
 
     const onLoginHandler = (e, credits) => {
         e.preventDefault();
@@ -38,7 +47,7 @@ function Log({ setToken }) {
     return (
         <Formik
             initialValues={{
-                email : '',
+                email : email || '',
                 password: '',
             }}
             validationSchema={ SendMessage }

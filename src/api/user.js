@@ -29,16 +29,18 @@ return dispatch => {
 };
 
 export const registerUser = (credits, callback = () => {}) => {
-    fetch(IP_BACK + REGISTER, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credits)
-    })
-    .then(res => {
-        if (res.status === 200 || res.status === 201) {
-            callback();
-        }
-    })
+    return dispatch => {
+        fetch(IP_BACK + REGISTER, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(credits)
+        })
+        .then(res => {
+            if (res.status === 200 || res.status === 201) {
+                callback(res.email);
+            }
+        })
+    }
 }

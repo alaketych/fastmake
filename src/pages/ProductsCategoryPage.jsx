@@ -21,7 +21,9 @@ const sortItems = [
     { name: 'higher price', type: `price&descending=true`},
 ]
 
-function ProductsCategoryPage() {
+function ProductsCategoryPage({
+    match
+}) {
     const dispatch  = useDispatch()
     const items = useSelector(({products}) => products.items)
     const isLoaded = useSelector(({products}) => products.isLoaded)
@@ -45,8 +47,10 @@ function ProductsCategoryPage() {
     }, [JSON.stringify(items)]);
 
     useEffect(() => {
-        dispatch(fetchCategoryProducts(category, sortBy))
-    }, [category, sortBy]);
+        if (match && match.params.id) {
+            dispatch(fetchCategoryProducts(match.params.id, sortBy))
+        }
+    }, [match, sortBy]);
 
     const [products, setProducts] = useState([])
 

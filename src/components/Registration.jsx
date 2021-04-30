@@ -2,8 +2,10 @@ import React, {useState, useEffect} from 'react'
 import { Field, Form, Formik } from 'formik';
 import { registerUser } from '../api';
 import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 import {} from '../configuration/app'
-import * as Yup from 'yup'
+import * as Yup from 'yup';
+import { userSetDefaultEmail } from '../redux/actions';
 
 const SendMessage = Yup.object().shape({
     firstName: Yup.string()
@@ -38,14 +40,16 @@ const SendMessage = Yup.object().shape({
 function Registration() {
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const onSubmitHandler = (e, credits) => {
         e.preventDefault();
         
-        const redirectToMainPage = () => {
-            history.push('/');
+        const redirectToMainPage = email => {
+            history.push('/login');
+            dispatch(userSetDefaultEmail(email))
         }
-        registerUser(credits, redirectToMainPage);
+        dispatch(registerUser(credits, redirectToMainPage));
     }
 
     return (

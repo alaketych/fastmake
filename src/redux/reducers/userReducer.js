@@ -4,6 +4,7 @@ const initialState = {
     loggedIn: false,
     role: 'guest',
     isLoading: false,
+    email: '',
 };
   
   export const products = (state = { ...initialState }, action) => {
@@ -22,6 +23,18 @@ const initialState = {
             ...state,
             isLoading: action.isLoading,
         }
+    }
+    case Actions.USER_SET_DEFAULT: {
+      return {
+        ...state,
+        email: action.email,
+      }
+    }
+    case Actions.USER_SET_DEFAULT_RESET: {
+      return {
+        ...state,
+        email: '',
+      }
     }
     default:
       return state
