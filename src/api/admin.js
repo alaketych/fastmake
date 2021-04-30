@@ -4,6 +4,7 @@ import {
     CATEGORIES,
     USERS,
     PRODUCTS,
+    USERS_EDIT_ROLE,
 } from '../configuration';
 
 export const fetchCategories = () => {
@@ -190,7 +191,7 @@ export const editCategory = (type, editedCategory, session = '', callback) => {
 export const editUser = (type, editedUser, session = '', callback) => {
     switch(type) {
         case 'update': {
-            fetch(IP_BACK + USERS + `${editedUser.id}`, {
+            fetch(IP_BACK + USERS_EDIT_ROLE + `${editedUser.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

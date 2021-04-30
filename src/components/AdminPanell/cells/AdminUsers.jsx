@@ -86,7 +86,7 @@ function AdminUsers(){
                                 />
                             )
                         }
-                        <input type="text" 
+                        {/* <input type="text" 
                             onChange={e => onEditChange('firstName', e.target.value)}
                             placeholder='First name'
                             value={editUser.firstName}
@@ -120,7 +120,7 @@ function AdminUsers(){
                             value={editUser.id}
                             className='editorInput'
                             defaultValue={''}
-                        />
+                        /> */}
                         <div className='buttonsWrapper'>
                             <button onClick={() => editProductOnSaveHandler('update', dispatch(fetchUsers()))}
                                 className={classNames('editorBtn update', {'disabled': 
