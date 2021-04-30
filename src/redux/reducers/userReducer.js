@@ -7,7 +7,7 @@ const initialState = {
     email: '',
 };
   
-  export const products = (state = { ...initialState }, action) => {
+export const products = (state = { ...initialState }, action) => {
   switch(action.type) {
     case Actions.SET_USER_ROLE:
       return {

@@ -131,13 +131,13 @@ function AdminUsers(){
                                 Update
                             </button>
 
-                            <button onClick={() => editProductOnSaveHandler('create', dispatch(fetchUsers()))}
+                            {/* <button onClick={() => editProductOnSaveHandler('create', dispatch(fetchUsers()))}
                                 className={classNames('editorBtn create', {
                                     'disabled': role !== 'Administrator'
                                 })}
                             >
                                 Create
-                            </button>
+                            </button> */}
 
                             
                         </div>

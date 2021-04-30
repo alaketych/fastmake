@@ -65,7 +65,6 @@ function AdminProducts(){
     };
     
     const handlePageChange = ({ selected }) => {
-        // getPageChange(selected + 1);
         dispatch(onChangePage(selected + 1, sortBy));
     };
 

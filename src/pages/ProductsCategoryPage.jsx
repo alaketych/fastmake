@@ -48,9 +48,9 @@ function ProductsCategoryPage({
 
     useEffect(() => {
         if (match && match.params.id) {
-            dispatch(fetchCategoryProducts(match.params.id, sortBy))
+            dispatch(fetchCategoryProducts(match.params.id, sortBy, pageNumber))
         }
-    }, [match, sortBy]);
+    }, [match, sortBy, pageNumber]);
 
     const [products, setProducts] = useState([])
 
@@ -76,39 +76,6 @@ function ProductsCategoryPage({
     return (
         <div className="content-inner">
             <div className="content-stretch space-bottom">
-                <div className="in-row">
-                    <CreatableSelect
-                        onChange={e => onSearchSelectHandler('editProductsSearchType',e.value)}
-                        options={[
-                            {
-                                value: "Description",
-                                label: "Description",
-                            },
-                            {
-                                value: "Label",
-                                label: "Label",
-                            },
-                        ]}
-                        placeholder='Product'
-                        value={{
-                            value: editProductsSearchType,
-                            label: editProductsSearchType,
-                        }}
-                        className='editorSelect'
-                    />
-                    <input type="text" 
-                        onChange={e => onSearchHandler('editProductsSearchValue', e.target.value)}
-                        placeholder='Search Value'
-                        value={editProductsSearchValue}
-                        className='editorInput'
-                    />
-                    <button className="button but-small"
-                            onClick={() => dispatch(onProductSearch())}
-                        >
-                            Search
-                    </button>
-                </div>
-
                 <SortPopup
                     items = { sortItems }          
                     activeSortType = { sortBy }

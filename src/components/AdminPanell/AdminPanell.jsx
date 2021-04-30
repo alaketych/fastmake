@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import "../../sass/components/AdminPanell.sass";
 
 function AdminPanell() {
-
     const {loggedIn, role} = useSelector(({user}) => user);
 
     const history = useHistory();
