@@ -26,7 +26,7 @@ function AdminUsers(){
     useEffect(() => {
         const token = localStorage.getItem('token');
         const userRole = localStorage.getItem('userRole');
-        if (!!loggedIn && token && (userRole === 'Administrator' || userRole === 'ContentManager')) {
+        if (!!loggedIn && token && (userRole === 'Administrator')) {
             dispatch(fetchUsers());
         } else {
             history.push('/');

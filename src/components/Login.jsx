@@ -17,6 +17,7 @@ const SendMessage = Yup.object().shape({
             .required('Required to fill'),
         
     password: Yup.string()
+            .min(6, 'Password can not contain at least 6 character')
             .required('Required to fill')
 })
 
@@ -84,7 +85,7 @@ function Log({ setToken }) {
                                 className={errors.password && touched.password && "error"}
                             />
                             {
-                                errors.name && touched.name && (
+                                errors.password && touched.password && (
                                     <div className="input-feedback">
                                         {errors.password}
                                     </div>

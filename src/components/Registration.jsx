@@ -6,12 +6,12 @@ import {} from '../configuration/app'
 import * as Yup from 'yup'
 
 const SendMessage = Yup.object().shape({
-    name: Yup.string()
+    firstName: Yup.string()
             .min(2, 'Name should have at least 2 symbols')
             .max(20, 'Name must not exceed more than 20 symbols')
             .required('Required to fill'),
             
-    surname: Yup.string()
+    lastName: Yup.string()
             .min(2, 'Name should have at least 2 symbols')
             .max(20, 'Name must not exceed more than 20 symbols')
             .required('Required to fill'),
@@ -25,6 +25,10 @@ const SendMessage = Yup.object().shape({
             .required('Required to fill')
             .positive()
             .integer(),
+
+    password: Yup.string()
+        .min(6, 'Password should be at least with 6 characters')
+        .required(),
 
     txt: Yup.string()
             .min(10, 'Field should have at least 10 symbols')
@@ -69,7 +73,7 @@ function Registration() {
                         <Form autoComplete="off"
                             onSubmit={(e) => onSubmitHandler(e, values) }>
 
-                            <label htmlFor="name">First Name</label>
+                            <label htmlFor="firstName">First Name</label>
                             <Field
                                 id="firstName"
                                 name="firstName"
@@ -132,7 +136,7 @@ function Registration() {
                                 onBlur={ handleBlur }
                                 placeholder="Your password"
                                 onChange={ handleChange }
-                                className={errors.phone  && touched.password && "error"}
+                                className={errors.password  && touched.password && "error"}
                             />
                             {
                                 errors.password && touched.password && (
