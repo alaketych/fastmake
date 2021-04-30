@@ -6,6 +6,11 @@ import {
   getUsers,
   getUser,
 } from '../../configuration/app'
+import {
+  IP_BACK,
+  LOGIN, REGISTER,
+  USERS, PRODUCTS, CATEGORIES
+} from '../../configuration/routesConfig.config'
 import axios from 'axios';
 
 export const setLoaded = value => ({
@@ -15,7 +20,7 @@ export const setLoaded = value => ({
 
 export const fetchCategories = (category, sortBy, pageNumber) => (dispatch, getState) => {
   dispatch(setLoaded(false))
-  axios.get(`https://localhost:5001/categories?pageNumber=${pageNumber}`).then(({ data }) => {
+  axios.get(IP_BACK + CATEGORIES +`?pageNumber=${pageNumber}`).then(({ data }) => {
       dispatch(setProducts(data))
   });
 };
@@ -35,7 +40,7 @@ export const onChangePage = (id) => dispatch => {
     page: id,
   })
 
-  axios.get(`https://localhost:5001/categories?pageNumber=${id}`).then(({ data }) => {
+  axios.get(IP_BACK + CATEGORIES + `?pageNumber=${id}`).then(({ data }) => {
       dispatch(setProducts(data))
   });
 };

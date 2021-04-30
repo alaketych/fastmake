@@ -4,8 +4,9 @@ import {
 } from '../../configuration/app';
 import {
   IP_BACK,
-  PRODUCTS,
-} from '../../configuration';
+  LOGIN, REGISTER,
+  USERS, PRODUCTS, CATEGORIES
+} from '../../configuration/routesConfig.config'
 
 export const setLoaded = value => ({
   type: 'SET_LOADED',
@@ -14,14 +15,14 @@ export const setLoaded = value => ({
 
 export const fetchProducts = (category, sortBy, pageNumber) => (dispatch, getState) => {
   dispatch(setLoaded(false))
-  axios.get(`https://localhost:5001/products?${!sortBy ? '' : `sortBy=${sortBy}`}&${pageNumber ? `pageNumber=${pageNumber}`:''}`).then(({ data }) => {
+  axios.get(IP_BACK + PRODUCTS + `?${!sortBy ? '' : `sortBy=${sortBy}`}&${pageNumber ? `pageNumber=${pageNumber}`:''}`).then(({ data }) => {
       dispatch(setProducts(data))
   });
 };
 
 export const fetchCategoryProducts = (id, sortBy, pageNumber) => (dispatch, getState) => {
   dispatch(setLoaded(false))
-  axios.get(`https://localhost:5001/products/category/${id}?${!sortBy ? '' : `sortBy=${sortBy}`}&${pageNumber ? `pageNumber=${pageNumber}`:''}`).then(({ data }) => {
+  axios.get(IP_BACK + PRODUCTS + `category/${id}?${!sortBy ? '' : `sortBy=${sortBy}`}&${pageNumber ? `pageNumber=${pageNumber}`:''}`).then(({ data }) => {
       dispatch(setProducts(data))
   });
 };
@@ -55,7 +56,7 @@ export const onChangePage = (id, sortBy) => dispatch => {
     type: 'PAGE_CHANGE',
     page: id,
   })
-  axios.get(`https://localhost:5001/products?pageNumber=${id}&${!sortBy ? '' : `sortBy=${sortBy}`}`).then(({ data }) => {
+  axios.get(IP_BACK + PRODUCTS + `?pageNumber=${id}&${!sortBy ? '' : `sortBy=${sortBy}`}`).then(({ data }) => {
       dispatch(setProducts(data))
   });
 };
@@ -66,7 +67,7 @@ export const onChangeCategoryProductsPage = (id, sortBy) => dispatch => {
     type: 'PAGE_CHANGE',
     page: id,
   })
-  axios.get(`https://localhost:5001/products/category?pageNumber=${id}&${!sortBy ? '' : `sortBy=${sortBy}`}`).then(({ data }) => {
+  axios.get(IP_BACK + PRODUCTS `category?pageNumber=${id}&${!sortBy ? '' : `sortBy=${sortBy}`}`).then(({ data }) => {
       dispatch(setProducts(data))
   });
 };

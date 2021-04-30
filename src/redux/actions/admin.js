@@ -9,6 +9,11 @@ import {
 import {
     fetchProductsSearch,
 } from '../actions';
+import {
+    IP_BACK,
+    LOGIN, REGISTER,
+    USERS, PRODUCTS, CATEGORIES
+} from '../../configuration/routesConfig.config'
 
 export const USER_GET_SUCCESS = 'USER_GET_SUCCESS';
 
@@ -77,7 +82,7 @@ export const categoriesOnChangePage = page => {
             type: GET_CATEGORY_PAGE_CHANGE,
             page: page,
         })
-        axios.get(`https://localhost:5001/categories?pageNumber=${page}`).then(({ data }) => {
+        axios.get(IP_BACK + CATEGORIES + `?pageNumber=${page}`).then(({ data }) => {
             dispatch(getCategoriesSuccess(data))
         });
     }
@@ -172,7 +177,7 @@ export const usersOnChangePage = page => {
             type: GET_USERS_CHANGE_PAGE,
             page: page,
         })
-        axios.get(`https://localhost:5001/categories?pageNumber=${page}`).then(({ data }) => {
+        axios.get(IP_BACK + CATEGORIES + `?pageNumber=${page}`).then(({ data }) => {
             dispatch(getUsersSuccess(data))
         });
     }
