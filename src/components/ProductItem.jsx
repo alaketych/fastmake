@@ -12,8 +12,8 @@ function ProductItem({
     price,
     discount,
     link,
+    onClickAdd,
 }) {
-
     const dispatch = useDispatch();
 
     const setEditFieldsHandler = () => {
@@ -25,6 +25,19 @@ function ProductItem({
             discount,
             link,
         }))
+    };
+
+    const onAddItem = () => {
+        const object = {
+            title,
+            description,
+            price,
+            discount,
+            link,
+            image,
+        };
+
+        onClickAdd(object);
     };
 
     return (
@@ -48,6 +61,7 @@ function ProductItem({
                     <h4 className="item__price">{ price } UAH</h4>
                     <Button 
                         label="Purchase"
+                        onClick={onAddItem}
                     />
                 </div>
             </div>

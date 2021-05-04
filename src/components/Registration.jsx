@@ -38,7 +38,6 @@ const SendMessage = Yup.object().shape({
 })
 
 function Registration() {
-
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -49,6 +48,7 @@ function Registration() {
             history.push('/login');
             dispatch(userSetDefaultEmail(email))
         }
+        
         dispatch(registerUser(credits, redirectToMainPage));
     }
 

@@ -5,6 +5,7 @@ export { default as Logo } from './Logo'
 export { default as Button } from './Button'
 export { default as Loader } from './Loader'
 
+export { default as CartItem } from './CartItem'
 export { default as SortPopup } from './SortPopup'
 export { default as CategoryFilter} from './CategoryFilter'
 

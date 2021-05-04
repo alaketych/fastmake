@@ -51,11 +51,7 @@ function ProductPage() {
     useEffect(() => {
         dispatch(fetchProducts(category, sortBy))
     }, [category, sortBy]);
-    
-    const onSelectCategory = index => {
-        dispatch(setCategory(index))
-    };
-    
+
     const onSelectSortType = type => {
         dispatch(setSortBy(type.type));
         dispatch(fetchProducts(category, type.type, pageNumber))
@@ -70,7 +66,14 @@ function ProductPage() {
     };
 
     const onSearchHandler = (name, value) => {
-        dispatch(editProductSearch(name, value))
+        dispatch(editProductSearch(name, value));
+    };
+
+    const handleAddItemToCart = (object) => {
+        dispatch({
+            type: 'ADD_PRODUCT_CART',
+            payload: object,
+        });
     };
 
     const pageCount = Math.ceil(items.totalRecords / items.pageSize)
@@ -130,6 +133,7 @@ function ProductPage() {
                             price={ item.price }
                             discount="-10%"
                             link={ item.id }
+                            onClickAdd={handleAddItemToCart}
                         />
                     ) : 
                     Array(12)

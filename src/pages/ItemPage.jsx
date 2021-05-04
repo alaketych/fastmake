@@ -4,7 +4,15 @@ import { fetchProducts, fetchProduct } from '../redux/actions/products';
 import { Button, ProductItem } from "../components/_index";
 import "../sass/components/ItemPage.sass";
 
-function ItemPage({ id, match }) {
+function ItemPage({ id, 
+    match,
+    title,
+    description,
+    price,
+    discount,
+    image,
+    onClickAdd 
+}) {
     const dispatch = useDispatch();
 
     const products = useSelector(({products}) => products.items)
@@ -22,6 +30,26 @@ function ItemPage({ id, match }) {
         dispatch(fetchProduct(id))
     }, [id]);
     
+    const onAddItem = () => {
+        const object = {
+            id,
+            title,
+            description,
+            price,
+            discount,
+            image,
+        };
+
+        onClickAdd(object);
+    };
+
+    const handleAddItemToCart = (object) => {
+        dispatch({
+            type: 'ADD_PRODUCT_CART',
+            payload: object,
+        });
+    };
+
     return (
         <div className="content-inner in-col">
             <div className="item-page">
@@ -36,6 +64,7 @@ function ItemPage({ id, match }) {
 
                     <Button 
                         label="Purchase"
+                        onClick={handleAddItemToCart}
                     />
                 </div>
             </div>

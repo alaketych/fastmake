@@ -5,5 +5,6 @@ export { default as CatalogPage } from "./CatalogPage"
 export { default as ProductPage } from "./ProductPage"
 export { default as ProductsCategoryPage } from "./ProductsCategoryPage"
 
+export { default as Cart } from "./Cart"
 export { default as Login } from "./Login"
 export { default as Registration } from "./Registration"

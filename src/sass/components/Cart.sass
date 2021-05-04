@@ -1,0 +1,95 @@
+.cart--empty
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    p
+        color: #8f8f8f
+        font-size: 20px
+        padding: 20px
+
+    h2
+        font-weight: 500
+        font-size: 25px
+
+.cart__top 
+    display: flex
+    align-items: center
+    justify-content: space-between
+    font-weight: 600
+
+.content__title 
+    display: flex
+    align-items: center
+    font-size: 32px
+
+    svg 
+      position: relative
+      top: -2px
+      width: 30px
+      height: 30px
+      margin-right: 10px
+      
+      path 
+        stroke: #000
+        stroke-width: 1.9
+      
+    
+  
+
+.content__items
+    display: flex
+    flex-wrap: wrap
+    justify-content: flex-start
+
+.cart__item
+    display: flex
+    width: 100%
+    border-top: 1px solid #f6f6f6
+    padding-top: 30px
+    margin-top: 30px
+    align-items: center
+
+.cart__bottom
+    display: flex
+    flex-direction: column
+    margin: 100px 0
+
+    &-details
+        display: flex
+        justify-content: flex-end
+        margin-bottom: 20px
+
+    &-buttons
+        display: flex
+        justify-content: space-between
+
+
+.cart__item-img
+    flex-grow: 0
+    max-width: 30%
+    
+    img
+        max-width: 30%
+
+.cart__item-info
+    flex-grow: 2
+
+.cart__item-count
+    display: flex
+    align-items: center
+    flex-grow: 10
+
+    b
+        padding: 0px 20px
+
+.cart_item-price
+    flex-grow: 4
+
+.cart_item-remove
+    flex-grow: 2
+
+.pay-btn
+    color: #e3e3e3
+    background: #fff
+    border: 1px solid #ff8000

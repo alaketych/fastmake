@@ -61,6 +61,17 @@ export const onChangePage = (id, sortBy) => dispatch => {
   });
 };
 
+export const onChangeProductsCategoryPage = (id, catID, sortBy) => dispatch => {
+  dispatch(setLoaded(false))
+  dispatch({
+    type: 'PAGE_CHANGE',
+    page: id,
+  })
+  axios.get(IP_BACK + PRODUCTS + `category/${catID}?pageNumber=${id}&${!sortBy ? '' : `sortBy=${sortBy}`}`).then(({ data }) => {
+      dispatch(setProducts(data))
+  });
+};
+
 export const onChangeCategoryProductsPage = (id, sortBy) => dispatch => {
   dispatch(setLoaded(false))
   dispatch({

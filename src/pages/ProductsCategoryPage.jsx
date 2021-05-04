@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { 
     onChangePage,
+    onChangeProductsCategoryPage,
     fetchCategoryProducts } from '../redux/actions/products';
 import {
     editProductSearch,
@@ -22,7 +23,14 @@ const sortItems = [
 ]
 
 function ProductsCategoryPage({
-    match
+    id,
+    match, 
+    title,
+    image,
+    price,
+    discount,
+    description,
+    onClickAdd 
 }) {
     const dispatch  = useDispatch()
     const items = useSelector(({products}) => products.items)
@@ -31,8 +39,6 @@ function ProductsCategoryPage({
         category,
         sortBy,
         pageNumber,
-        editProductsSearchType,
-        editProductsSearchValue,
     } = useSelector(({ filters }) => filters)
 
     const [state, setState] = useState({
@@ -52,10 +58,8 @@ function ProductsCategoryPage({
         }
     }, [match, sortBy, pageNumber]);
 
-    const [products, setProducts] = useState([])
-
     const handlePageChange = ({ selected }) => {
-        dispatch(onChangePage(selected + 1, sortBy));
+        dispatch(onChangeProductsCategoryPage(selected + 1, sortBy));
     }
 
     const onSelectSortType = type => {
@@ -63,15 +67,31 @@ function ProductsCategoryPage({
         dispatch(fetchCategoryProducts(category, type.type, pageNumber))
     };
 
-    const onSearchSelectHandler = (name, value) => {
-        dispatch(editProductSearch(name, value));
-    };
-
     const onSearchHandler = (name, value) => {
         dispatch(editProductSearch(name, value))
     };
-
+    
     const pageCount = Math.ceil(items.totalRecords / items.pageSize)
+
+    const onAddItem = () => {
+        const object = {
+            id,
+            title,
+            description,
+            price,
+            discount,
+            image,
+        };
+
+        onClickAdd(object);
+    };
+
+    const handleAddItemToCart = (object) => {
+        dispatch({
+            type: 'ADD_PRODUCT_CART',
+            payload: object,
+        });
+    };
 
     return (
         <div className="content-inner">
@@ -95,6 +115,7 @@ function ProductsCategoryPage({
                         price={ item.price }
                         discount="-10%"
                         link={ item.id }
+                        onClickAdd={handleAddItemToCart}
                     />
                 ) : 
                 Array(12)
