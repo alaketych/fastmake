@@ -8,12 +8,13 @@ import {
 } from '../../api';
 import {
     fetchProductsSearch,
+    showMessage,
 } from '../actions';
 import {
     IP_BACK,
     LOGIN, REGISTER,
     USERS, PRODUCTS, CATEGORIES
-} from '../../configuration/routesConfig.config'
+} from '../../configuration/routesConfig.config';
 
 export const USER_GET_SUCCESS = 'USER_GET_SUCCESS';
 
@@ -67,6 +68,9 @@ export const getCategoriesError = data => {
             type: GET_CATEGORIES_ERROR,
             data,
         });
+        dispatch(showMessage({
+            message: 'Error while fetching products!'
+        }))
     }
 };
 

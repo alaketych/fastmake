@@ -3,6 +3,7 @@ import { userSetUserRole, userAuthSuccess } from './redux/actions';
 import { Header, Footer } from "./components/_index"
 import { Dashboard } from "./pages/admin/_index"
 import { Home, ItemPage, CatalogPage, ProductPage, ProductsCategoryPage, Login, Registration, Cart } from "./pages/_index";
+import Message from './components/Message';
 import { AdminCategory, AdminProducts, AdminUsers } from './components/AdminPanell/cells';
 import { AdminPage } from './pages/admin/_index';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -24,7 +25,7 @@ function App() {
       <BrowserRouter>
 
         <Header />
-
+        <Message />
           <Switch>
             <Route path="/" component={ Home } exact />
             <Route path="/catalog" component={ CatalogPage } exact />
