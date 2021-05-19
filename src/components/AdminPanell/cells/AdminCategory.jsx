@@ -8,6 +8,7 @@ import {
     editCategoryChange,
     editCategoryOnSave,
     categoriesOnChangePage,
+    showModal,
 } from '../../../redux/actions';
 import "../../../sass/components/cells/AdminProducts.sass";
 import ReactPaginate from "react-paginate";
@@ -45,6 +46,14 @@ function AdminCategory(){
     const handlePageChange = ({ selected }) => {
         dispatch(categoriesOnChangePage(selected + 1));
     };
+
+    const onDeleteHandler = () => {
+        dispatch(showModal({
+            message: 'Do you want to remove selected categories?',
+            handleYes: editProductOnSaveHandler('remove', dispatch(fetchCategories())),
+        }))
+        
+    }
 
     const pageCount = Math.ceil(catPotalRecords / catPageSize);
 
@@ -86,7 +95,7 @@ function AdminCategory(){
 
                             {
                                 role === 'Administrator' && (
-                                    <button onClick={() => editProductOnSaveHandler('remove', dispatch(fetchCategories()))}
+                                    <button onClick={onDeleteHandler}
                                         className={classNames('editorBtn remove', {'disabled': !editCategory.id || role === 'ContentManager'})}
                                     >
                                         Remove

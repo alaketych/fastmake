@@ -1,7 +1,7 @@
 import { SHOW_MODAL, HIDE_MODAL } from '../actions';
 
 const initialState = {
-    open: true,
+    open: false,
     content: '',
     message: '',
   };

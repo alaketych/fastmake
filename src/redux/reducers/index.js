@@ -6,6 +6,7 @@ import userReducer from './userReducer';
 import cart from './cart';
 import admin from './admin';
 import message from './message';
+import modal from './modal';
 
 const rootReducer = combineReducers({
   filters: filtersReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   admin: admin,
   cart: cart,
   message: message,
+  modal: modal,
 });
 
 export default rootReducer

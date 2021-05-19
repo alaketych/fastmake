@@ -1,11 +1,12 @@
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
-export const showModal = ({message}) => {
+export const showModal = ({message, content}) => {
     return dispatch => {
         dispatch({
             type: SHOW_MODAL,
-            message
+            message,
+            content,
         })
     };
 };
